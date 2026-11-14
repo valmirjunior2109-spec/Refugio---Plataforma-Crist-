@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Refúgio — tokens de design
+   Paleta oficial: sálvia #668773 · verde profundo #34463B ·
+   areia #E9E4D7 · marfim #F7F5EF · branco · cinza #8C918A · #343F37
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --bg: #f7f5ef;
+  --surface: #ffffff;
+  --surface-2: #efebe0;
+  --sand: #e9e4d7;
+  --ink: #2c362f;
+  --ink-soft: #343f37;
+  --muted: #5f675f; /* versão acessível (AA) do cinza neutro */
+  --subtle: #8c918a;
+  --line: #e3ded1;
+  --line-strong: #d3cdbd;
+  --brand: #668773;
+  --brand-soft: #e3ebe5;
+  --brand-ink: #34463b;
+  --primary: #34463b;
+  --primary-hover: #2a3930;
+  --on-primary: #f7f5ef;
+  --focus: #668773;
+  --danger: #a24b3f;
+  --danger-soft: #f6e6e2;
+  --success: #3f6e52;
+  --success-soft: #e2eee6;
+  --warning: #8a6a2b;
+  --warning-soft: #f4ecd9;
+  --shadow: 0 1px 2px rgb(52 70 59 / 0.04), 0 8px 24px -12px rgb(52 70 59 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161c18;
+    --surface: #1d2520;
+    --surface-2: #232c26;
+    --sand: #2a332d;
+    --ink: #ece8dd;
+    --ink-soft: #d9d5c9;
+    --muted: #a9aea6;
+    --subtle: #7f857d;
+    --line: #2c3630;
+    --line-strong: #3a463e;
+    --brand: #8fae9a;
+    --brand-soft: #24312a;
+    --brand-ink: #c4d6ca;
+    --primary: #c9dacd;
+    --primary-hover: #dbe7de;
+    --on-primary: #1b241e;
+    --focus: #8fae9a;
+    --danger: #e0907f;
+    --danger-soft: #3a2420;
+    --success: #9fc8ad;
+    --success-soft: #1f3127;
+    --warning: #d9bd7e;
+    --warning-soft: #352d1c;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #161c18;
+  --surface: #1d2520;
+  --surface-2: #232c26;
+  --sand: #2a332d;
+  --ink: #ece8dd;
+  --ink-soft: #d9d5c9;
+  --muted: #a9aea6;
+  --subtle: #7f857d;
+  --line: #2c3630;
+  --line-strong: #3a463e;
+  --brand: #8fae9a;
+  --brand-soft: #24312a;
+  --brand-ink: #c4d6ca;
+  --primary: #c9dacd;
+  --primary-hover: #dbe7de;
+  --on-primary: #1b241e;
+  --focus: #8fae9a;
+  --danger: #e0907f;
+  --danger-soft: #3a2420;
+  --success: #9fc8ad;
+  --success-soft: #1f3127;
+  --warning: #d9bd7e;
+  --warning-soft: #352d1c;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display), ui-serif, Georgia, serif;
+
+  --shadow-soft: var(--shadow);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.375rem;
+  --radius-3xl: 1.75rem;
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.4s ease both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 5rem;
+  }
+  html, body {
+    overflow-x: clip;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--brand-soft);
+    color: var(--brand-ink);
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Texto bíblico: palavras acrescentadas pelos tradutores */
+  .scripture em {
+    font-style: italic;
+    color: var(--muted);
+  }
+  /* Destaque do versículo ao navegar por âncora (#v12) */
+  .verse:target {
+    background: var(--brand-soft);
+    border-radius: 0.375rem;
+    box-shadow: 0 0 0 4px var(--brand-soft);
+  }
+  .select-chevron {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%238C918A%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m6 9 6 6 6-6%27/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+  }
+  .prose-refugio p + p {
+    margin-top: 1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Espaço reservado para a barra de navegação inferior no mobile */
+.pb-safe-nav {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) {
+  .pb-safe-nav { padding-bottom: 0; }
+}
