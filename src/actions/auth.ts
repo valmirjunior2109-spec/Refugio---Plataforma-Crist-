@@ -55,7 +55,19 @@ export async function signUp(input: unknown): Promise<ActionResult> {
     },
   });
   if (error) {
+    // Registra a causa real nos logs do servidor (Vercel → Logs), sem expor detalhes ao visitante.
+    console.error("[signUp]", error.code, error.status, error.message);
     if (error.code === "weak_password") return { ok: false, error: "Escolha uma senha mais forte." };
+    if (error.code === "user_already_exists" || error.code === "email_exists") {
+      return { ok: false, error: "Este e-mail já tem conta. Tente entrar ou recuperar a senha." };
+    }
+    if (error.code === "over_email_send_rate_limit" || error.code === "over_request_rate_limit") {
+      return { ok: false, error: "Muitos cadastros em pouco tempo. Aguarde alguns minutos e tente novamente." };
+    }
+    if (error.code === "email_address_invalid") return { ok: false, error: "Este endereço de e-mail não foi aceito." };
+    if (/sending.*email|smtp/i.test(error.message)) {
+      return { ok: false, error: "Não conseguimos enviar o e-mail de confirmação agora. Tente novamente mais tarde." };
+    }
     return { ok: false, error: "Não foi possível criar a conta agora. Tente novamente." };
   }
   if (data.session) {
