@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ExternalLink, Info } from "lucide-react";
 import { Container, PageHeader } from "@/components/layout/page";
-import { BOM_SOURCE, BOOK_OF_MORMON, chapterUrl } from "@/lib/scriptures/book-of-mormon";
+import Link from "next/link";
+import { BOM_SOURCE, BOOK_OF_MORMON, readerHref } from "@/lib/scriptures/book-of-mormon";
 
 export const metadata: Metadata = {
   title: "Livro de Mórmon",
-  description: "Índice dos livros e capítulos do Livro de Mórmon, com acesso ao texto no site oficial.",
+  description: "Índice dos livros e capítulos do Livro de Mórmon, com leitura do texto oficial.",
   robots: { index: false },
 };
 
@@ -23,8 +24,8 @@ export default function BookOfMormonPage() {
         <Info className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />
         <p>
           O texto em português do Livro de Mórmon pertence a {BOM_SOURCE.name} e é protegido por direitos autorais. Por
-          isso, os capítulos abrem no site oficial ({BOM_SOURCE.site}), em uma nova aba e sem custo. O Refúgio não copia
-          nem altera o texto.
+          isso, cada capítulo é lido aqui mesmo, mas exibido diretamente do site oficial ({BOM_SOURCE.site}). O Refúgio
+          não copia nem altera o texto.
         </p>
       </aside>
 
@@ -40,15 +41,13 @@ export default function BookOfMormonPage() {
             <ul className="grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-10">
               {Array.from({ length: book.chapters }, (_, i) => i + 1).map((c) => (
                 <li key={c}>
-                  <a
-                    href={chapterUrl(book.slug, c)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${book.name}, capítulo ${c} (abre o site oficial em nova aba)`}
+                  <Link
+                    href={readerHref(book.slug, c)}
+                    aria-label={`${book.name}, capítulo ${c}`}
                     className="grid aspect-square place-items-center rounded-xl border border-line bg-surface font-medium text-ink-soft tabular-nums hover:border-brand hover:bg-brand-soft hover:text-brand-ink"
                   >
                     {c}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -7,7 +7,7 @@ O Refúgio é uma plataforma web cristã, gratuita e solidária: um espaço de f
 - **Palavra do dia**: passagem bíblica, reflexão, aplicação prática e oração, com histórico.
 - **Preciso de uma palavra**: dez estados do coração ("Estou triste", "Preciso de paz"...), cada um com passagem, contexto, reflexão, esperança, oração e leituras complementares.
 - **Bíblia completa** em português (Bíblia Livre), com navegação por livro e capítulo, além de salvar, copiar e compartilhar trechos.
-- **Livro de Mórmon**: índice dos 15 livros e 239 capítulos, com leitura no site oficial (o texto em português é protegido por direitos autorais e não é copiado).
+- **Livro de Mórmon**: 15 livros e 239 capítulos lidos dentro do app, com navegação entre capítulos. O texto oficial é exibido incorporado do site da Igreja (é protegido por direitos autorais e não é copiado).
 - **Diário de oração** privado, com categorias, marcadores, filtros por período, edição e exclusão.
 - **Planos de leitura** (8 jornadas iniciais) com progresso individual, sem rankings e sem cobrança.
 - **Meu espaço**: planos iniciados, versículos salvos, reflexões favoritas, objetivos pessoais e atividade recente.

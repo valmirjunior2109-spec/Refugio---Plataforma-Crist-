@@ -2,12 +2,11 @@
  * Livro de Mórmon: índice de livros e capítulos.
  *
  * O texto em português é protegido por direitos autorais (Intellectual Reserve, Inc.)
- * e NÃO é copiado para o Refúgio. Cada capítulo abre no site oficial, gratuito.
- * Se um dia houver licença para exibir o texto aqui, basta trocar `chapterUrl`
- * por uma rota interna.
+ * e NÃO é copiado para o Refúgio. Cada capítulo é lido dentro do app, mas a página
+ * exibida é a oficial, incorporada (iframe) e servida pelo próprio site da Igreja.
  */
 export interface BomBook {
-  slug: string; // identificador do site oficial
+  slug: string; // identificador do site oficial (também usado na URL do Refúgio)
   name: string;
   chapters: number;
 }
@@ -36,6 +35,30 @@ export const BOM_SOURCE = {
   indexUrl: "https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=por",
 } as const;
 
+/** Endereço oficial do capítulo (exibido incorporado no leitor). */
 export function chapterUrl(bookSlug: string, chapter: number): string {
   return `https://www.churchofjesuschrist.org/study/scriptures/bofm/${bookSlug}/${chapter}?lang=por`;
+}
+
+/** Rota interna do leitor no Refúgio. */
+export function readerHref(bookSlug: string, chapter: number): string {
+  return `/livro-de-mormon/${bookSlug}/${chapter}`;
+}
+
+export function getBomBook(slug: string): BomBook | undefined {
+  return BOOK_OF_MORMON.find((b) => b.slug === slug);
+}
+
+/** Capítulo anterior/seguinte, atravessando livros. Retorna null nas pontas. */
+export function getAdjacentBomChapter(
+  book: BomBook,
+  chapter: number,
+  dir: -1 | 1,
+): { book: BomBook; chapter: number } | null {
+  const target = chapter + dir;
+  if (target >= 1 && target <= book.chapters) return { book, chapter: target };
+  const idx = BOOK_OF_MORMON.indexOf(book);
+  const other = BOOK_OF_MORMON[idx + dir];
+  if (!other) return null;
+  return { book: other, chapter: dir === 1 ? 1 : other.chapters };
 }
