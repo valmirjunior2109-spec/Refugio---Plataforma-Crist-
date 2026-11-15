@@ -124,8 +124,7 @@ export function PlanProgressPanel({
 
       {mode === "guest" && (
         <Alert className="mb-6" title="Acompanhe seu progresso">
-          <Link href={`/entrar?next=/planos/${plan.slug}`}>Entre na sua conta</Link> para marcar leituras concluídas. Você
-          também pode ler livremente, sem cadastro.
+          <Link href={`/entrar?next=/planos/${plan.slug}`}>Entre na sua conta</Link> para marcar leituras concluídas.
         </Alert>
       )}
 

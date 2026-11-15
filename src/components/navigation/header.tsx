@@ -20,7 +20,10 @@ export function Header({ authEnabled }: { authEnabled: boolean }) {
           <Logo compact />
         </Link>
 
-        <nav aria-label="Navegação principal" className="hidden lg:block">
+        <nav
+          aria-label="Navegação principal"
+          className={cn("hidden lg:block", authEnabled && (!ready || !user) && "invisible")}
+        >
           <ul className="flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
               const active = isActive(item, pathname);

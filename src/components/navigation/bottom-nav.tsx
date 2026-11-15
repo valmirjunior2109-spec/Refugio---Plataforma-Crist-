@@ -2,12 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSessionUser } from "@/hooks/use-session-user";
 import { cn } from "@/lib/utils/cn";
 import { NAV_ITEMS, isActive } from "./nav-items";
 
 /** Navegação inferior fixa no celular e tablet. */
-export function BottomNav() {
+export function BottomNav({ authEnabled = false }: { authEnabled?: boolean }) {
   const pathname = usePathname();
+  const { user, ready } = useSessionUser();
+  // Com contas ativas, o conteúdo exige login: visitantes não veem a navegação.
+  if (authEnabled && (!ready || !user)) return null;
   return (
     <nav
       aria-label="Navegação principal"

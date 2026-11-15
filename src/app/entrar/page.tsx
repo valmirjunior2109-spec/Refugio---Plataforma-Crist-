@@ -15,8 +15,16 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
   const nextPath = safeNextPath(next);
   if (await getCurrentUser()) redirect(nextPath);
 
+  const cameFromContent = Boolean(next) && nextPath !== "/";
   return (
-    <AuthShell title="Que bom ter você de volta" description="Entre para acessar seu diário, seus planos e versículos salvos.">
+    <AuthShell
+      title={cameFromContent ? "Entre para continuar" : "Que bom ter você de volta"}
+      description={
+        cameFromContent
+          ? "O conteúdo do Refúgio é para pessoas cadastradas. Entre ou crie sua conta gratuita."
+          : "Entre para acessar a Palavra do dia, a Bíblia, seu diário e seus planos."
+      }
+    >
       {erro && (
         <Alert tone="danger" className="mb-5">
           Não foi possível confirmar o link. Ele pode ter expirado. Tente novamente.

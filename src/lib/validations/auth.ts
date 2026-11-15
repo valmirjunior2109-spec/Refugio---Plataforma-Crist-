@@ -46,7 +46,7 @@ export const deleteAccountSchema = z.object({
 });
 
 /** Garante que o redirecionamento pós-login fique dentro do próprio site. */
-export function safeNextPath(next: unknown, fallback = "/meu-espaco"): string {
+export function safeNextPath(next: unknown, fallback = "/"): string {
   if (typeof next !== "string") return fallback;
   if (!next.startsWith("/") || next.startsWith("//") || next.startsWith("/\\")) return fallback;
   return next;

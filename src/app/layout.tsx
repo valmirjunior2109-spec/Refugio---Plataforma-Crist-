@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="pb-safe-nav">
           <Footer />
         </div>
-        <BottomNav />
+        <BottomNav authEnabled={configured} />
         <ServiceWorkerRegister />
       </body>
     </html>

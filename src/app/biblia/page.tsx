@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowRight, BookMarked, CalendarDays } from "lucide-react";
 import { Container, PageHeader } from "@/components/layout/page";
 import { BookPicker } from "@/components/bible/book-picker";
 import { BIBLE_BOOKS, TRANSLATION } from "@/lib/bible/books";
@@ -60,6 +60,25 @@ export default function BiblePage() {
         >
           <CalendarDays className="size-4" aria-hidden />
           Ou siga um plano de leitura
+        </Link>
+      </section>
+
+      <section aria-labelledby="outras-escrituras" className="mb-12">
+        <h2 id="outras-escrituras" className="mb-3 text-sm font-semibold text-ink-soft">
+          Outras escrituras
+        </h2>
+        <Link
+          href="/livro-de-mormon"
+          className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-surface p-4 hover:border-brand/40 sm:max-w-md"
+        >
+          <span className="flex items-center gap-3">
+            <BookMarked className="size-5 text-brand" aria-hidden />
+            <span>
+              <span className="block font-serif text-lg text-ink">Livro de Mórmon</span>
+              <span className="block text-sm text-muted">15 livros, com leitura no site oficial</span>
+            </span>
+          </span>
+          <ArrowRight className="size-4 shrink-0 text-subtle transition-transform group-hover:translate-x-1" aria-hidden />
         </Link>
       </section>
 

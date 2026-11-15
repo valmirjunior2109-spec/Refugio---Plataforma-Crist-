@@ -11,7 +11,7 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Início", icon: (p) => <House {...p} aria-hidden />, match: ["/", "/palavra-do-dia"] },
-  { href: "/biblia", label: "Bíblia", icon: (p) => <BookOpen {...p} aria-hidden />, match: ["/biblia", "/planos"] },
+  { href: "/biblia", label: "Bíblia", icon: (p) => <BookOpen {...p} aria-hidden />, match: ["/biblia", "/planos", "/livro-de-mormon"] },
   { href: "/oracoes", label: "Orações", icon: (p) => <HandHeart {...p} aria-hidden />, match: ["/oracoes"] },
   {
     href: "/refugio",

@@ -256,7 +256,7 @@ function GuestSpace({ configured }: { configured: boolean }) {
       <PageHeader
         eyebrow="Meu espaço"
         title="Um espaço só seu"
-        description="Todo o conteúdo do Refúgio pode ser lido sem cadastro. A conta serve para guardar o que é pessoal, com privacidade."
+        description="Com sua conta gratuita, você acessa todo o conteúdo do Refúgio e guarda o que é pessoal, com privacidade."
       />
       <ul className="grid gap-3 sm:grid-cols-2">
         {items.map(({ icon: Icon, title, text }) => (

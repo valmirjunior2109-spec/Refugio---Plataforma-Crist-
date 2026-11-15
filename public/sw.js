@@ -4,18 +4,16 @@
  * - NUNCA guarda rotas pessoais, administrativas ou de autenticação,
  *   nem respostas marcadas como privadas (usuário logado).
  */
-const VERSION = "refugio-v1";
+const VERSION = "refugio-v2";
 const STATIC_CACHE = `${VERSION}-static`;
 const PAGES_CACHE = `${VERSION}-pages`;
 const OFFLINE_URL = "/offline";
 const PRECACHE = [OFFLINE_URL, "/favicon.svg", "/icons/icon-192.png", "/manifest.webmanifest"];
 
+// Só páginas abertas a visitantes. Páginas vistas com sessão chegam como
+// "private, no-store" e nunca são guardadas (ver isCacheableResponse).
 const PUBLIC_PREFIXES = [
-  "/biblia",
-  "/palavra-do-dia",
-  "/preciso-de-uma-palavra",
-  "/planos",
-  "/refugio",
+  "/boas-vindas",
   "/sobre",
   "/ajuda",
   "/privacidade",
@@ -24,7 +22,7 @@ const PUBLIC_PREFIXES = [
 const MAX_PAGES = 80;
 
 function isPublicPage(pathname) {
-  return pathname === "/" || PUBLIC_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
+  return PUBLIC_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 }
 
 function isCacheableResponse(res) {

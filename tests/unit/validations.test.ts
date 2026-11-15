@@ -70,10 +70,10 @@ describe("autenticação", () => {
 
   it("redirecionamento após login nunca sai do site", () => {
     expect(safeNextPath("/oracoes")).toBe("/oracoes");
-    expect(safeNextPath("//evil.com")).toBe("/meu-espaco");
-    expect(safeNextPath("https://evil.com")).toBe("/meu-espaco");
-    expect(safeNextPath("/\\evil.com")).toBe("/meu-espaco");
-    expect(safeNextPath(undefined)).toBe("/meu-espaco");
+    expect(safeNextPath("//evil.com")).toBe("/");
+    expect(safeNextPath("https://evil.com")).toBe("/");
+    expect(safeNextPath("/\\evil.com")).toBe("/");
+    expect(safeNextPath(undefined)).toBe("/");
   });
 });
 

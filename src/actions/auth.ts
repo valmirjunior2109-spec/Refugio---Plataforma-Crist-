@@ -50,7 +50,7 @@ export async function signUp(input: unknown): Promise<ActionResult> {
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      emailRedirectTo: `${SITE.url}/auth/confirmar?next=/meu-espaco`,
+      emailRedirectTo: `${SITE.url}/auth/confirmar?next=/`,
       data: { display_name: parsed.data.displayName, accepted_terms: true },
     },
   });

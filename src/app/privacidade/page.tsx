@@ -40,10 +40,11 @@ export default function PrivacyPage() {
           </p>
         </LegalSection>
 
-        <LegalSection title="2. O que você pode fazer sem conta">
+        <LegalSection title="2. Conta">
           <p>
-            Ler a Palavra do dia, a Bíblia, as reflexões e os planos de leitura, além de enviar feedback, sem criar conta.
-            Nesses casos, não pedimos nenhum dado pessoal.
+            O conteúdo do Refúgio (Palavra do dia, Bíblia, reflexões e planos) é acessado com uma conta gratuita. Sem
+            conta, ficam disponíveis apenas as páginas institucionais, o envio de feedback e a página de ajuda
+            emergencial. A conta serve só para dar acesso e guardar seus registros; pedimos o mínimo de dados.
           </p>
         </LegalSection>
 

@@ -7,14 +7,28 @@ O Refúgio é uma plataforma web cristã, gratuita e solidária: um espaço de f
 - **Palavra do dia**: passagem bíblica, reflexão, aplicação prática e oração, com histórico.
 - **Preciso de uma palavra**: dez estados do coração ("Estou triste", "Preciso de paz"...), cada um com passagem, contexto, reflexão, esperança, oração e leituras complementares.
 - **Bíblia completa** em português (Bíblia Livre), com navegação por livro e capítulo, além de salvar, copiar e compartilhar trechos.
+- **Livro de Mórmon**: índice dos 15 livros e 239 capítulos, com leitura no site oficial (o texto em português é protegido por direitos autorais e não é copiado).
 - **Diário de oração** privado, com categorias, marcadores, filtros por período, edição e exclusão.
 - **Planos de leitura** (8 jornadas iniciais) com progresso individual, sem rankings e sem cobrança.
 - **Meu espaço**: planos iniciados, versículos salvos, reflexões favoritas, objetivos pessoais e atividade recente.
-- **Ajude o Refúgio a crescer**: feedback sem cadastro, com limite de envios.
+- **Ajude o Refúgio a crescer**: feedback (aberto também a visitantes), com limite de envios.
 - **Painel administrativo** para a equipe publicar conteúdo e ler feedbacks.
 - **PWA instalável** (opcional), com página offline. Mobile em primeiro lugar, modo claro e escuro.
 
 > Sem assinaturas, anúncios, paywalls ou venda de dados. Todas as funcionalidades são gratuitas, para sempre.
+
+### Acesso com conta
+
+Todo o conteúdo exige uma **conta gratuita**. A regra fica em `src/lib/supabase/access.ts` e é aplicada pelo middleware. Sem login, ficam abertas apenas:
+
+- `/boas-vindas` (para onde o visitante é levado ao abrir o site);
+- entrar, cadastro e recuperação de senha;
+- `/sobre`, `/termos`, `/privacidade` e `/ajude-a-crescer`;
+- `/ajuda`, com os canais de ajuda emergencial (CVV 188). **Ela nunca deve exigir cadastro.**
+
+Ao tentar abrir outra página, o visitante vai para o login e, depois de entrar, volta para onde queria. No modo demonstração (sem Supabase) não há como entrar, então nada é bloqueado.
+
+Como todos precisam se cadastrar, **configure um SMTP próprio no Supabase** antes de divulgar o site. O envio padrão permite poucos e-mails por hora e cadastros deixariam de receber a confirmação.
 
 ---
 
@@ -88,7 +102,7 @@ Abra <http://localhost:3000>.
 
 Sem as variáveis do Supabase, o app funciona em **modo demonstração**, identificado por uma faixa no topo:
 
-- todo o conteúdo público (Palavra do dia, Bíblia, temas, planos) funciona;
+- todo o conteúdo (Palavra do dia, Bíblia, temas, planos) fica aberto, para facilitar o desenvolvimento;
 - contas, diário, progresso e feedback ficam **desativados**, com aviso claro. Nada finge ter sido salvo.
 
 ## Configuração do ambiente

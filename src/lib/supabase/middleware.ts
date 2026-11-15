@@ -1,17 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { guestRedirect, isGuestOnlyPath, isPublicPath } from "./access";
 import { getSupabaseConfig } from "./env";
 
-/** Rotas que exigem sessão. A autorização fina (admin, dono do registro) fica no servidor e no RLS. */
-const PROTECTED_PREFIXES = ["/oracoes/nova", "/oracoes/registro", "/meu-espaco/", "/admin"];
-
-export function isProtectedPath(pathname: string): boolean {
-  return PROTECTED_PREFIXES.some((p) => pathname === p.replace(/\/$/, "") || pathname.startsWith(p));
-}
-
 /**
- * Renova a sessão do Supabase a cada requisição e redireciona visitantes
- * de rotas protegidas para o login. Em modo demonstração, não faz nada.
+ * Renova a sessão do Supabase a cada requisição e aplica a regra de acesso:
+ * visitantes só abrem as páginas públicas (ver access.ts); o resto pede login.
+ *
+ * Em modo demonstração (sem Supabase) não há como entrar, então nada é bloqueado.
  */
 export async function updateSession(request: NextRequest): Promise<NextResponse> {
   let response = NextResponse.next({ request });
@@ -34,14 +30,24 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   } = await supabase.auth.getUser();
 
   const { pathname, search } = request.nextUrl;
-  if (!user && isProtectedPath(pathname)) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/entrar";
-    url.search = `?next=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+
+  if (!user && !isPublicPath(pathname)) {
+    return redirectKeepingCookies(request, response, guestRedirect(pathname, search));
   }
 
-  // Páginas pessoais nunca devem ser guardadas em caches compartilhados.
+  if (user && isGuestOnlyPath(pathname)) {
+    return redirectKeepingCookies(request, response, "/");
+  }
+
+  // Páginas vistas com sessão nunca devem ser guardadas em caches compartilhados.
   if (user) response.headers.set("Cache-Control", "private, no-store");
   return response;
+}
+
+/** Redireciona preservando cookies de sessão que o Supabase possa ter renovado. */
+function redirectKeepingCookies(request: NextRequest, response: NextResponse, target: string): NextResponse {
+  const redirect = NextResponse.redirect(new URL(target, request.url));
+  response.cookies.getAll().forEach((c) => redirect.cookies.set(c));
+  redirect.headers.set("Cache-Control", "private, no-store");
+  return redirect;
 }
