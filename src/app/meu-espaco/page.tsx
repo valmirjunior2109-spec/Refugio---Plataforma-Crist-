@@ -10,6 +10,7 @@ import {
   NotebookPen,
   Settings,
   Shield,
+  Smartphone,
   Target,
   UserRound,
 } from "lucide-react";
@@ -65,6 +66,9 @@ export default async function MySpacePage({ searchParams }: { searchParams: Prom
                 Painel
               </ButtonLink>
             )}
+            <ButtonLink href="/instalar" variant="ghost" size="sm" icon={<Smartphone className="size-4" aria-hidden />}>
+              Instalar app
+            </ButtonLink>
             <ButtonLink href="/meu-espaco/configuracoes" variant="ghost" size="sm" icon={<Settings className="size-4" aria-hidden />}>
               Configurações
             </ButtonLink>

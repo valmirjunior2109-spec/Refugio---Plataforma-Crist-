@@ -17,6 +17,7 @@ const PUBLIC_PATHS = new Set([
   "/termos",
   "/privacidade",
   "/ajude-a-crescer",
+  "/instalar",
   "/offline",
   "/opengraph-image",
 ]);

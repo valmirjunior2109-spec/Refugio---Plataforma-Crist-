@@ -4,6 +4,7 @@ import { TRANSLATION } from "@/lib/bible/books";
 import { SITE } from "@/lib/site";
 
 const links = [
+  { href: "/instalar", label: "Instale o app" },
   { href: "/sobre", label: "Sobre o Refúgio" },
   { href: "/ajuda", label: "Precisa de ajuda agora?" },
   { href: "/ajude-a-crescer", label: "Ajude o Refúgio a crescer" },
