@@ -4,7 +4,7 @@ import { BOOK_OF_MORMON, chapterUrl } from "@/lib/scriptures/book-of-mormon";
 
 describe("acesso por rota (conteúdo exige conta)", () => {
   it("páginas públicas abertas a visitantes", () => {
-    for (const p of ["/boas-vindas", "/entrar", "/cadastro", "/recuperar-senha", "/ajuda", "/sobre", "/termos", "/privacidade", "/ajude-a-crescer", "/auth/confirmar", "/entrar/"]) {
+    for (const p of ["/boas-vindas", "/entrar", "/cadastro", "/recuperar-senha", "/ajuda", "/sobre", "/termos", "/privacidade", "/ajude-a-crescer", "/instalar", "/auth/confirmar", "/entrar/"]) {
       expect(isPublicPath(p), p).toBe(true);
     }
   });
@@ -35,5 +35,14 @@ describe("Livro de Mórmon", () => {
     expect(BOOK_OF_MORMON).toHaveLength(15);
     expect(BOOK_OF_MORMON.reduce((n, b) => n + b.chapters, 0)).toBe(239);
     expect(chapterUrl("alma", 32)).toBe("https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/32?lang=por");
+  });
+});
+
+describe("instalação do app", () => {
+  it("reconhece o aparelho para mostrar os passos certos", async () => {
+    const { detectPlatform } = await import("@/lib/pwa/install-prompt");
+    expect(detectPlatform("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1")).toBe("ios");
+    expect(detectPlatform("Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/120.0 Mobile Safari/537.36")).toBe("android");
+    expect(detectPlatform("Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0 Safari/537.36")).toBe("desktop");
   });
 });

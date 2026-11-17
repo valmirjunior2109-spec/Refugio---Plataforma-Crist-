@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, CalendarDays, HandHeart, LifeBuoy, NotebookPen, Sun } from "lucide-react";
+import { BookOpen, CalendarDays, HandHeart, LifeBuoy, NotebookPen, Smartphone, Sun } from "lucide-react";
 import { Container } from "@/components/layout/page";
 import { LogoMark } from "@/components/brand/logo";
 import { ButtonLink } from "@/components/ui/button";
@@ -43,6 +43,13 @@ export default function WelcomePage() {
             </ButtonLink>
           </div>
           <p className="mt-4 text-sm text-muted">Gratuito para sempre. Sem anúncios e sem venda de dados.</p>
+          <Link
+            href="/instalar"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand-ink underline-offset-4 hover:underline"
+          >
+            <Smartphone className="size-4" aria-hidden />
+            Instale o app no seu celular
+          </Link>
         </Container>
       </section>
 
